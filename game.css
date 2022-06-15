@@ -148,12 +148,14 @@ section{
 }
 .player-hand {
     transform: rotateY(180deg);
+    border-radius: 50%;
   }
 .player-hand{
   width: 190px;
     height: 150px;
     margin-top: 10%;
     margin-left: -25px;
+    border-radius: 50%;
 }
 .computer-hand{
     width: 190px;
