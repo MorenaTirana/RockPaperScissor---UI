@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <
+</head>
+<body>
+    <section class="game">
+       
+        <div class="intro">
+            <h1>Rock Paper Scissors</h1>
+            <button> Let's Play</button>
+        </div>
+        <div class="match fadeOut">
+          <!----
+            <div id="score" class="score">
+                <p> Player: 0</p>
+                <p> Computer: 0</p>
+            </div>
+        -->
+      
+            <div id ="score" class="score">
+                <div class="player-score">
+                    <h2>Player</h2>
+                    <p>0</p>
+                </div>
+                <div class="computer-score">
+                    <h2>Computer</h2>
+                    <p>0</p>
+                </div>
+            </div>
+        
+            
+            <h2 class="winner">Choose an option</h2>
+            <div class="hands">
+                <img class= "player-hand" src="img/rock.png" alt="rock">
+                <img class= "computer-hand" src="img/rock.png" alt="rock">
+            </div>
+            <div class="options">
+                <button class="rock" style="color:rgb(224, 224, 224);
+                border: 3px solid green;
+                background-color: green;">rock</button>
+                <button class="paper" style="background-color: yellow; border: 3px solid yellow;
+                color: #000;">paper</button>
+                <button class="scissors" style="background-color: blue;
+                color: #fff; border: 3px solid blue;">scissors</button>        
+            </div>
+             <button id="restart" class="restart-btn" style="color:rgb(224, 224, 224);
+                 border: 3px solid red;
+                 background-color: red;">
+                    Restart
+            </button>
+        </div>
+      
+        <!----
+        <div class="modal">
+            <div id="result" class="modal-content"></div>
+        </div> -->
+    </section>
+    
+    <script>
+ 
+        let playerScore = 0;
+        let computerScore = 0;
+        const score = document.getElementById('scoreKeeper');
+        
+      
+        // computer choice
+        function getcomputerChoice(){
+            return ["rock", "paper", "scissors"][Math.floor(Math.random() * 3)];
+        }
+       
+        // get the winner
+        function getWinner(playerChoice, computerChoice)
+        {
+            if(playerChoice === computerChoice){
+                alert(`It's a Draw! 😑 Try once more 🤞🏻!`);
+                return 'draw';
+            } else if(playerChoice === "rock")
+            { 
+                if(computerChoice === "paper")
+                {
+                    //computerScore++;
+                    alert(`You lost 😔! Paper beats Rock! Try again 🤞🏻`);
+                    return 'computer';
+                   
+                } else{
+                   // playerScore++;
+                    alert(`Rock beats Scissors ✅ ! You WON 🥳 ! Congratulations 🍾!`);
+                    return 'player';
+                   
+                }
+            } else if(playerChoice === "paper")
+            {
+                if(computerChoice === "rock"){
+                    //playerScore++;
+                    alert(`Paper beats Rock ✅! You Won 🥳 ! Congratulations 🍾!`);
+                    return 'player';
+                } else{
+                   // computerScore++;
+                    alert(`Scissors beats Paper! You Lost 😔! Try again 🤞🏻!`);
+                    return 'computer';
+                }
+            } else if(playerChoice === "scissors")
+            {
+                if(computerChoice === "rock")
+                {
+                  //  computerScore++;
+                    alert(`Rock beats Scissors! You Lost 😔! Try again 🤞🏻!`);
+                    return 'computer';
+                } else{
+                  //  playerScore++;
+                    alert(`Scissors beats Paper ✅! You Won 🥳! Congrats 🍾!`);
+                    return 'player';
+                }
+            }
+        }
+     
+        function showWinner(winner, computerChoice)
+        {
+            let score = document.getElementById("scoreKeeper");
+            if(winner == 'player')
+            {
+                playerScore++;
+                winner++;
+                score.innerHTML = `You <span style='color: green;font-weight:bold;'>Won 🥳 </span>! <br>
+                                   Your Score: <span style='color:green;font-weight:bold;'>${playerScore}</span>
+                                   Computer Score:<span style='color:blue; font-weight: bold;'> ${computerScore}`;
+             
+            } else if(winner == 'computer')
+            {
+                computerScore++;
+                winner++;
+                score.innerHTML = `You <span style='color: red; font-weight:bold;'>Lost 😔 </span>! <br>
+                                   Your Score: <span style='color:green; font-weight:bold;'>${playerScore}</span>
+                                   Computer Score: <span style='color:blue;'>${computerScore}`;
+              
+            } else{
+                score.innerHTML = `Your Score: <span style='color:green;font-weight: bold;'>${playerScore}</span>
+                                   Computer Score: <span style='color:blue; font-weight: bold;'>${computerScore}</span>`;
+            }
+            body.appendChild(resetBtn);
+
+        }
+     
+        function play(choice)
+        {
+            playerChoice = choice;
+            const computerChoice = getcomputerChoice();
+            const winner = getWinner(playerChoice, computerChoice);
+            showWinner(winner, computerChoice);
+        }
+
+    
+    
+        function resetButton()
+        {
+            playerScore = 0;
+            computerScore = 0;
+            document.getElementById('winner').innerHTML = "Results";
+            document.getElementById("rockButton").removeAttribute("style");
+            document.getElementById("paperButton").removeAttribute("style");
+            document.getElementById("scissorsButton").removeAttribute("style");
+            body.removeChild(resetBtn);
+            document.getElementById("scoreKeeper").innerHTML = `
+            Your Score: ${playerScore} Computer Score: ${computerScore}
+            `;
+        }
+      
+      
+        let playerChoice = "";
+        let body = document.querySelector('body');
+
+        // creating & declaring the Paper button
+        const paperBtn = document.createElement("button");
+        paperBtn.textContent = "PAPER";
+        paperBtn.setAttribute("id", "paperButton");
+        paperBtn.addEventListener('click', function(){
+            play("paper");
+        })
+        body.appendChild(paperBtn);
+
+         // creating & declaring the Rock button
+        const rockBtn = document.createElement("button");
+        rockBtn.textContent = "ROCK";
+        rockBtn.setAttribute("id", "rockButton");
+        rockBtn.addEventListener('click', function(){
+            play("rock");
+        })
+        body.appendChild(rockBtn);
+
+        // creating & declaring the Scissors button
+        const scissorsBtn = document.createElement("button");
+        scissorsBtn.textContent = "SCISSORS";
+        scissorsBtn.setAttribute("id", "scissorsButton");
+        scissorsBtn.addEventListener('click', function(){
+            play("scissors");
+        })
+        body.appendChild(scissorsBtn);
+
+        // creating & declaring the Reset button
+        const resetBtn = document.createElement("button");
+        resetBtn.textContent ="RESTART";
+        resetBtn.setAttribute("id", "resetButton");
+        resetBtn.addEventListener('click', function(){
+            resetButton();
+        })
+   
+
+        // result div 
+        let resultDiv = document.createElement("div");
+        resultDiv.setAttribute("id", "winner");
+        resultDiv.textContent = "Results";
+        body.appendChild(resultDiv);
+
+        // scoreKeeper div 
+        let scoreKeeperDiv = document.createElement("div");
+        scoreKeeperDiv.setAttribute("id", "scoreKeeper");
+        scoreKeeperDiv.textContent = `Your Score: 0 Computer Score: 0`;
+        body.appendChild(scoreKeeperDiv); 
+        const playBtn = document.createElement("button");
+      
+
+    </script>
+</body>
+</html>
