@@ -3,10 +3,13 @@
     padding: 0;
     box-sizing: border-box;
 }
-html{
-    background: url(img/background.png);
+body{
+    background: url(img/background.png) no-repeat;
+    background-position: center;
     background-size: cover;
-    min-height:100vh;
+    width: 100%;
+    height: 100vh;
+
 }
 .links-container{
   display: flex;
@@ -18,7 +21,7 @@ html{
   font-size: 20px;
   text-shadow: 2px 2px 4px #000000;
   text-decoration: none;
-  margin: 0 10px;
+  margin: 30px 10px;
   padding: 10px;
   position: relative;
 }
@@ -119,25 +122,25 @@ section{
     z-index: 9;
 }
 .rock{
-    transform: translate(500%, -245%);
+    transform: translate(430%, -220%);
     color:rgb(224, 224, 224);
     border: 3px solid green;
     background-color: green;
 }
 .paper{
-    transform: translate(485%, -335%);
+    transform: translate(420%, -310%);
     background-color: yellow;
     border: 3px solid yellow;
     color: #000
 }
 .scissors{
-    transform: translate(475%, -245%);
+    transform: translate(410%, -220%);
     background-color: blue;
     color: #fff; 
     border: 3px solid blue;
 }
 .restart-btn{
-    transform: translate(590%, -250%);
+    transform: translate(525%, -230%);
     color:rgb(224, 224, 224);
     border: 3px solid red;
     background-color: red;
@@ -146,11 +149,17 @@ section{
 .player-hand {
     transform: rotateY(180deg);
   }
-
-.computer-hand, .player-hand{
+.player-hand{
+  width: 190px;
+    height: 150px;
+    margin-top: 10%;
+    margin-left: -25px;
+}
+.computer-hand{
     width: 190px;
     height: 150px;
-    margin: 10% 30px;
+    margin-top: 10%;
+    margin-left: 30px;
 }
 div.fadeOut{
     opacity: 0;
@@ -159,6 +168,18 @@ div.fadeOut{
 div.fadeIn{
     opacity: 1;
     pointer-events: all;
+}
+.repo{
+  padding-left: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  color: red;
+  padding-top: 40px;
+
+}
+.repo a{
+  color: yellow;
+  text-shadow: 5px 5px 6px 10px #000;
 }
 @keyframes shakePlayer {
     0% {
